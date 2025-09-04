@@ -7,8 +7,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <style>
+        .container{
+            width: 80%;
+            margin: 30px auto;
+        }
+        .input{
+            margin: 10px 0px;
+        }
+    </style>
 </head>
 <body>
+
+<div class="container">
+
+
+
 
 <form action="" method="post">
 
@@ -25,6 +40,8 @@
     <input type="submit" value="CONVERTIR">
 </form>
 
+
+<h4>
 <?php 
 
 if( isset($_POST["temperatura"]))
@@ -49,6 +66,10 @@ if( isset($_POST["temperatura"]))
     }
 
 ?>
+
+</h4>
+
+</div>
     
 </body>
 </html>
