@@ -12,9 +12,9 @@
 
 <form action="" method="post">
 
-    <label for=""><input type="radio" name="tipo" value="F"> fahrenheit</label>
+    <label for=""><input type="radio" name="tipo" value="F"> fahrenheit -> Celcius</label>
     
-    <Label><input type="radio" name="tipo" value="C">Celcius</Label>
+    <Label><input type="radio" name="tipo" value="C">Celcius -> fahrenheit</Label>
 
     <br>
 
@@ -25,7 +25,30 @@
     <input type="submit" value="CONVERTIR">
 </form>
 
-<?php ?>
+<?php 
+
+if( isset($_POST["temperatura"]))
+    {
+        $tempratura = 0;
+        if($_POST['tipo'] === 'F')
+            {
+                $tempratura = ($_POST["temperatura"] -32 ) * 1/9;
+
+                echo "La conversion de F -> C: {$tempratura}";
+
+            }
+        if($_POST['tipo'] === 'C')
+            {
+
+                $tempratura = ($_POST["temperatura"] * 9/5 ) +32 ;
+
+                echo "La conversion de C -> F: {$tempratura}";
+                
+            }
+
+    }
+
+?>
     
 </body>
 </html>
