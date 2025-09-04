@@ -12,6 +12,10 @@ if (!isset($_SESSION["compras"])) {
     
 }
 $_SESSION['total'] = 0;
+
+if (!isset($_SESSION["descuento"])){
+    $_SESSION["descuento"] = 0;
+} 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,10 +72,13 @@ if ($compra < 25)
 {
         $_SESSION['total']  += $costo_envio;
 
-        echo "EL costo de la compra + costo de envio es igual a $" . $_SESSION['total'];
+        $_SESSION["descuento"] = $_SESSION['total'];
+
+        echo "EL costo de la compra + costo de envio es igual a $" . $_SESSION["descuento"];
 }
 else{
-    echo "EL costo de la compra es igual a $" . $_SESSION['total'] ;
+    $_SESSION["descuento"] = $_SESSION['total'];
+    echo "EL costo de la compra es igual a $" . $_SESSION["descuento"];
 }
 ?>
 
@@ -79,7 +86,36 @@ else{
     <label for="codigo"></label>
     <input type="text" placeholder="INGRESA EL CODIGO DE DESCUENTO" required name="codigo" id="codigo">
 
+    <input type="submit" value="aceptar">
 </form>
+
+<?php 
+
+if($_SERVER['REQUEST_METHOD'] == 'POST' )
+    {
+        if(isset($_POST['codigo']))
+            {
+                $cogido = $_POST['codigo'];
+
+                if($cogido === 'AHORRO10')
+                    {
+                        $_SESSION["descuento"] = $_SESSION['total']  -($_SESSION['total'] * 0.10);
+
+                        echo 'COSTO DE ENVIO CON DESCUENTO APLICADO CORRECTAMENTE TOTAL: $'. $_SESSION["descuento"];
+
+                    }
+                
+                if($cogido === 'ENVIOGRATIS')
+                    {
+                         $_SESSION["descuento"] = $_SESSION['total'] -  $costo_envio ;
+                         echo 'COSTO DE ENVIO CON DESCUENTO APLICADO CORRECTAMENTE TOTAL: $'. $_SESSION["descuento"];
+                    }
+            }
+    }
+
+    
+
+?>
 
 </body>
 
