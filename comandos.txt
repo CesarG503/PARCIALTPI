@@ -1,0 +1,3 @@
+docker build -t cesargo22007-server-php:V0 .
+
+docker run -d --name go22007-contenedor-server --rm -p 8080:80 -v .:/var/www/html cesargo22007-server-php:V0
