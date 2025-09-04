@@ -23,7 +23,7 @@ if (!isset($_SESSION["compras"])) {
 </head>
 <body>
 
-<table>
+<table border="1">
     <thead>
         <tr>
             <th>Producto</th>
@@ -36,7 +36,22 @@ if (!isset($_SESSION["compras"])) {
 
     <? foreach($_SESSION['compras'] as $compra): ?>
         <tr>
-            <th></th>
+            <th><?php echo $compra['producto'] ?></th>
+            <th><?php echo $compra['precio'] ?></th>
+            <th><?php echo $compra['cantidad'] ?></th>
+            <th><?php 
+
+            $IVA = 1.13; #iva del 13% pero la multiplico * 1 para sumarle el total de una vez
+            $DESCUENTO = 0.05;
+            $precio = ($compra['precio'] * $compra['cantidad']) * $IVA; 
+
+            if ($compra['cantidad'] > 5){
+                $precio = $precio - ($precio * $DESCUENTO);  
+            }
+
+            echo $precio;
+            
+            ?></th>
         </tr>
     
     <?php endforeach; ?>
