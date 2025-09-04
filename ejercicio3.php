@@ -9,9 +9,9 @@ if (!isset($_SESSION["compras"])) {
         ['producto' => 'platanos', 'precio' => 1.50, 'cantidad' => 2],
         ['producto' => 'sandia', 'precio' => 1.50, 'cantidad' => 2],
     ];
+    
 }
-
-
+$_SESSION['total'] = 0;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +50,7 @@ if (!isset($_SESSION["compras"])) {
             }
 
             echo $precio;
+            $_SESSION['total'] += $precio;
             
             ?></th>
         </tr>
@@ -58,6 +59,27 @@ if (!isset($_SESSION["compras"])) {
 
     </tbody>
 </table>
+
+<?php
+
+$costo_envio = 2.99;
+
+if ($compra < 25)
+{
+        $_SESSION['total']  += $costo_envio;
+
+        echo "EL costo de la compra + costo de envio es igual a $" . $_SESSION['total'];
+}
+else{
+    echo "EL costo de la compra es igual a $" . $_SESSION['total'] ;
+}
+?>
+
+<form action="" method="post">
+    <label for="codigo"></label>
+    <input type="text" placeholder="INGRESA EL CODIGO DE DESCUENTO" required name="codigo" id="codigo">
+
+</form>
 
 </body>
 
